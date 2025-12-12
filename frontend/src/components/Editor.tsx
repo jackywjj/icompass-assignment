@@ -26,14 +26,31 @@ const Editor = () => {
     handleChange,
     handleClear,
     hasChanges,
+    updateInitialContent,
   } = useEditorData();
 
   const {
     showVersions,
     setShowVersions,
-    handleSaveVersion,
-    handleRestoreVersion,
+    handleSaveVersion: originalHandleSaveVersion,
+    handleRestoreVersion: originalHandleRestoreVersion,
   } = useVersionManagement(content, setVersions, setContent, quillRef);
+
+  // 包装保存版本函数，保存成功后更新初始内容
+  const handleSaveVersion = async () => {
+    const result = await originalHandleSaveVersion();
+    // 保存成功后，将当前内容作为新的初始内容
+    if (result) {
+      updateInitialContent(content);
+    }
+  };
+
+  // 包装恢复版本函数，恢复后更新初始内容
+  const handleRestoreVersion = (version: any) => {
+    originalHandleRestoreVersion(version);
+    // 恢复后，将恢复的内容作为新的初始内容
+    updateInitialContent(version.content);
+  };
 
   const {
     isReviewMode,

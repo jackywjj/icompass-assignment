@@ -13,7 +13,7 @@ export const useVersionManagement = (
   const [showVersions, setShowVersions] = useState(false);
 
   // 保存版本 - 保存 article 
-  const handleSaveVersion = async () => {
+  const handleSaveVersion = async (): Promise<boolean> => {
     try {
       const article = await api.saveArticle(content);
       if (article) {
@@ -26,10 +26,13 @@ export const useVersionManagement = (
           author: a.author,
         })));
         alert('版本已保存');
+        return true;
       }
+      return false;
     } catch (error) {
       console.error('保存版本失败:', error);
       alert('保存版本失败，请重试');
+      return false;
     }
   };
 

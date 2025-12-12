@@ -11,17 +11,10 @@ export interface Article {
   created_at?: string;
 }
 
-export interface ArticleSaveRequest {
-  content: string;
-}
-
 /**
  * 文章相关 API
  */
 export const articleApi = {
-  /**
-   * 获取当前文章（按 id 倒序，第一条为最近的一条记录）
-   */
   async getCurrentArticle(): Promise<Article | null> {
     const response = await request.get<Article>('/api/article/current');
     return response.data || null;

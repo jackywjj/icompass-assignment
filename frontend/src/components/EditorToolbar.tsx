@@ -2,7 +2,7 @@ import React from 'react';
 
 interface EditorToolbarProps {
   onClear: () => void;
-  onSaveVersion: () => void;
+  onSaveVersion: () => void | Promise<void>;
   showVersions: boolean;
   onToggleVersions: () => void;
   isReviewMode: boolean;
@@ -12,7 +12,7 @@ interface EditorToolbarProps {
   commentsCount: number;
   onAddReview: () => void;
   onAddComment: () => void;
-  hasChanges: boolean; // 内容是否有更改
+  hasChanges: boolean;
 }
 
 export const EditorToolbar: React.FC<EditorToolbarProps> = ({

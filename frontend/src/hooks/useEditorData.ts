@@ -39,7 +39,7 @@ export const useEditorData = () => {
           setContent(savedContent);
           setInitialContent(savedContent); // 保存初始内容
           if (!savedContent) {
-            storage.clear();
+          storage.clear();
           }
         }
 
@@ -68,7 +68,7 @@ export const useEditorData = () => {
         console.error('加载数据失败:', error);
         // 如果后端请求失败，尝试从 localStorage 加载
         const savedContent = storage.load() || '';
-        setContent(savedContent);
+          setContent(savedContent);
         setInitialContent(savedContent); // 保存初始内容
         if (!savedContent) {
           storage.clear();
@@ -144,6 +144,11 @@ export const useEditorData = () => {
     }
   };
 
+  // 更新初始内容的函数（用于保存版本后重置）
+  const updateInitialContent = useCallback((newInitialContent: string) => {
+    setInitialContent(newInitialContent);
+  }, []);
+
   return {
     content,
     setContent,
@@ -158,5 +163,6 @@ export const useEditorData = () => {
     handleChange,
     handleClear,
     hasChanges, // 导出是否有更改的状态
+    updateInitialContent, // 导出更新初始内容的函数
   };
 };
