@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Dict, Optional
+from typing import List, Dict
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from models import Comment
@@ -43,20 +43,6 @@ class CommentService:
         """获取所有批注，按时间倒序"""
         comments = self.db.query(Comment).order_by(desc(Comment.timestamp)).all()
         return [comment.to_dict() for comment in comments]
-    
-    def get_comment_by_id(self, comment_id: int) -> Optional[Dict]:
-        """根据 ID 获取批注"""
-        comment = self.db.query(Comment).filter(Comment.id == comment_id).first()
-        return comment.to_dict() if comment else None
-    
-    def delete_comment(self, comment_id: int) -> bool:
-        """删除批注"""
-        comment = self.db.query(Comment).filter(Comment.id == comment_id).first()
-        if comment:
-            self.db.delete(comment)
-            self.db.commit()
-            return True
-        return False
     
     def get_comment_count(self) -> int:
         """获取批注总数"""

@@ -7,14 +7,12 @@ from controllers import (
     article_router,
     session_router,
     request_router,
-    stats_router,
-    version_router,
     comment_router
 )
 from database import init_db
 from middleware.session_middleware import SessionMiddleware
 # 导入所有模型以确保 SQLAlchemy 能够识别它们
-from models import Article, Version, Comment, Session, RequestLog
+from models import Article, Comment, Session, RequestLog
 
 # 初始化数据库
 init_db()
@@ -46,8 +44,6 @@ app.include_router(user_router)
 app.include_router(article_router)
 app.include_router(session_router)
 app.include_router(request_router)
-app.include_router(stats_router)
-app.include_router(version_router)
 app.include_router(comment_router)
 
 if __name__ == "__main__":

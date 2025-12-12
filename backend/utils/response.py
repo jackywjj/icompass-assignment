@@ -1,4 +1,4 @@
-from typing import Any, Optional, Dict
+from typing import Any, Dict
 
 from fastapi.responses import JSONResponse
 
@@ -20,16 +20,13 @@ def success_response(
 
 def error_response(
         message: str = "操作失败",
-        status_code: int = 400,
-        error_code: Optional[str] = None
+        status_code: int = 400
 ) -> JSONResponse:
     """错误响应"""
     content = {
         "success": False,
         "message": message
     }
-    if error_code:
-        content["error_code"] = error_code
 
     return JSONResponse(
         status_code=status_code,
@@ -40,8 +37,3 @@ def error_response(
 def not_found_response(message: str = "资源不存在") -> JSONResponse:
     """404 响应"""
     return error_response(message=message, status_code=404)
-
-
-def server_error_response(message: str = "服务器内部错误") -> JSONResponse:
-    """500 响应"""
-    return error_response(message=message, status_code=500)

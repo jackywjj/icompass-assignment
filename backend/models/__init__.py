@@ -1,12 +1,12 @@
+from .base import BaseModel
 from .article import Article
-from .version import Version
 from .comment import Comment
 from .session import Session
 from .request_log import RequestLog
 
 __all__ = [
+    "BaseModel",
     "Article",
-    "Version",
     "Comment",
     "Session",
     "RequestLog"

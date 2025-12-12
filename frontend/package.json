@@ -4,8 +4,11 @@
   "description": "实时协同文本编辑器",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode dev",
     "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode dev",
+    "build:uat": "tsc && vite build --mode uat",
+    "build:prd": "tsc && vite build --mode prd",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
